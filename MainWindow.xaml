@@ -10,6 +10,8 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition MaxWidth="70" />
+            <ColumnDefinition MaxWidth="100" />
+            <ColumnDefinition MaxWidth="200" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -17,7 +19,15 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Button Grid.Row="0" Grid.Column="0" Content="Profiles" Click="ProfileButton_Click"/>
-        <Label Grid.Row="0" Grid.Column="1" VerticalContentAlignment="Center" Content="{Binding CurrentProfile, ElementName=_this}"/>
-        <ListBox Grid.Row="1" Grid.ColumnSpan="2" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+        <Button Grid.Row="0" Grid.Column="1" Content="Output Directory" Click="OutputDirectoryButton_Click"/>
+        <TextBlock Grid.Row="0" Grid.Column="2" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="10" Text="{Binding CurrentOutputDirectory, ElementName=_this}"/>
+        <Label Grid.Row="0" Grid.Column="3" VerticalContentAlignment="Center" Content="{Binding CurrentProfile, ElementName=_this}"/>
+        <ListBox Grid.Row="1" Grid.ColumnSpan="4" x:Name="taskListBox" ItemsSource="{Binding Source={x:Static local:FFmpegTask.RunningTasks}}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Status}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>
